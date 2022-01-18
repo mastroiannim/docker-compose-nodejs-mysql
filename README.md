@@ -13,7 +13,7 @@ We can easily run the whole with only a single command:
 docker-compose up --build
 ```
 
-Docker will pull the MySQL and Node.js images (if our machine does not have it before).
+Docker will pull the MySQL and PHP images (if our machine does not have it before).
 
 The services can be run on the background with command:
 ```bash
