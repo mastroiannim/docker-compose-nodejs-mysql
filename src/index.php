@@ -1,11 +1,10 @@
 <?php
-  
 
     $servername = "mariadb";
-    $username = "myuser";
-    $password = "mypass";
+    $username = getenv('MYSQL_USER');
+    $password = getenv('MYSQL_PASSWORD');
 
-    $dbname = "db_php";
+    $dbname = getenv('MYSQL_DATABASE');
 
     // Create connection
     $conn = new mysqli($servername, $username, $password, $dbname);

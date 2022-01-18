@@ -11,6 +11,10 @@ services:
             target: base
         depends_on:
             - mariadb
+        environment:
+            MYSQL_DATABASE: "${MYSQL_DATABASE}"
+            MYSQL_USER: "${MYSQL_USER}"
+            MYSQL_PASSWORD: "${MYSQL_PASSWORD}"
         ports:
             - "${PORT}:80"
         networks:
@@ -18,11 +22,6 @@ services:
     mariadb:
         container_name: mariadb
         image: mariadb:10.5.3-bionic
-        environment:
-            MYSQL_ROOT_PASSWORD: changeme
-            MYSQL_DATABASE: db_php
-            MYSQL_USER: myuser
-            MYSQL_PASSWORD: mypass
         ports:
             - "3306:3306"
         networks:
