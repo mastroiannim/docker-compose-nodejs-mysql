@@ -2,7 +2,7 @@ tasks:
   - init: |
       docker-compose pull
   - command: |
-      docker-compose up
+      sudo docker-compose up --build
 
 
 ports:

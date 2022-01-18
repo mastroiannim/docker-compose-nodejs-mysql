@@ -4,10 +4,36 @@ services:
     php:
         container_name: php
         image: php
-        restart: always
+        restart: on-failure
         build:
             context: .
             dockerfile: Dockerfile
             target: base
+        depends_on:
+            - mariadb
         ports:
             - "${PORT}:80"
+        networks:
+            - elastic
+    mariadb:
+        container_name: mariadb
+        image: mariadb:10.5.3-bionic
+        environment:
+            MYSQL_ROOT_PASSWORD: changeme
+            MYSQL_DATABASE: db_php
+            MYSQL_USER: myuser
+            MYSQL_PASSWORD: mypass
+        ports:
+            - "3306:3306"
+        networks:
+            - elastic
+        restart: on-failure
+        volumes:
+            - ${PWD}/mariadb:/var/lib/mysql
+            # All scripts in docker-entrypoint-initdb.d/ are automatically
+            # executed during container startup
+            - ./database/db.sql:/docker-entrypoint-initdb.d/db.sql
+
+networks:
+  elastic:
+    driver: bridge
