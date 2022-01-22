@@ -34,7 +34,7 @@ services:
         container_name: mariadb
         image: mariadb
         environment:
-            MYSQL_RANDOM_ROOT_PASSWORD: YES
+            MYSQL_RANDOM_ROOT_PASSWORD: "YES"
             MYSQL_DATABASE: ${MYSQL_DATABASE}
             MYSQL_USER: ${MYSQL_USER}
             MYSQL_PASSWORD: ${MYSQL_PASSWORD}
@@ -45,10 +45,10 @@ services:
         restart: on-failure
         user: ${UID}:${GID}
         volumes:
-            - ${PWD}/mariadb:/var/lib/mysql
+            - /mnt/${PWD}/mariadb:/var/lib/mysql
             # All scripts in docker-entrypoint-initdb.d/ are automatically
             # executed during container startup
-            - ${PWD}/database/db.sql:/docker-entrypoint-initdb.d/db.sql
+            - /mnt/${PWD}/database/db.sql:/docker-entrypoint-initdb.d/db.sql
 
 networks:
   elastic:
