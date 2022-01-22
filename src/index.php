@@ -6,6 +6,8 @@
 
     $dbname = getenv('MYSQL_DATABASE');
 
+    echo "servername: $servername, username:$username, password:$password, dbname:$dbname";
+    
     // Create connection
     $conn = new mysqli($servername, $username, $password, $dbname);
     // Check connection
@@ -25,6 +27,6 @@
         echo "0 results";
     }
     $conn->close();
-
-      //phpinfo();
+    
+    phpinfo();
 ?>
